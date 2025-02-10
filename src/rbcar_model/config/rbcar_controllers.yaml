@@ -1,0 +1,39 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 50  # Hz
+
+    ackermann_steering_controller:
+      type: ackermann_steering_controller/AckermannSteeringController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+ackermann_steering_controller:
+  ros__parameters:
+    front_steering_joints: ["robot_left_steering_joint", "robot_right_steering_joint"]
+    # rear_wheels: ["robot_left_rear_axle", "robot_right_rear_axle"]
+    # front_wheels: ["robot_left_front_axle", "robot_right_front_axle"]
+    wheel_separation: 1.24248  # Twice the wheel_offset_y
+    wheel_radius: 0.3  # Half of tire_dia
+    wheelbase: 1.82262  # Twice the wheel_offset_x
+    
+    # Limits
+    max_steering_angle: 0.6  # radians
+    max_steering_speed: 0.1  # rad/s
+    max_speed: 1.0  # m/s
+    max_acceleration: 1.0  # m/s^2
+    
+    # Optional parameters
+    publish_rate: 50.0  # Hz
+    odom_frame_id: odom
+    base_frame_id: base_footprint
+    enable_odom_tf: true
+    
+    # PID parameters
+    pose_p_gain: 1.0
+    pose_i_gain: 0.0
+    pose_d_gain: 0.0
+    
+    # Input smoothing
+    cmd_vel_timeout: 0.5  # seconds
+    velocity_rolling_window_size: 10 
