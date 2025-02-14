@@ -1,0 +1,1 @@
+This serves as a document to setup nav2 with turtlebot3. We will go through all the steps one by one. 

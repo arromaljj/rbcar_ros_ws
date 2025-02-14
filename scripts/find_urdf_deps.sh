@@ -1,0 +1,1 @@
+find src/robotnik_sensors/robotnik_sensors/urdf -type f -exec grep -H 'filename="[^"]*\.so"' {} \; | sed -n 's/^\(.*\):.*filename="\([^"]*\.so\)".*$/\1 \2/p'

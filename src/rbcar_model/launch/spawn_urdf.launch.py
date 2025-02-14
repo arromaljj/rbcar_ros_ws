@@ -12,20 +12,7 @@ from launch_ros.parameter_descriptions import ParameterValue
 
 
 
-def output_xacro_to_urdf_cmd_debug():
-    """
-    For debug purpose only when we need to see output of xacro to urdf conversion to some file.
-    """
-    # Get the source directory path (assuming we're in the workspace root)
-    src_path = os.path.join(os.getcwd(), 'src', 'rbcar_model')
-    urdf_file = os.path.join(src_path, 'robots', 'rbcar2.urdf.xacro')
-    output_urdf_file = os.path.join(src_path, 'out', 'rbcar.urdf')
-    generate_urdf_cmd = ExecuteProcess(
-        cmd=['xacro', urdf_file, 'prefix:=robot_', '>', output_urdf_file],
-        output='screen',
-        shell=True  # Needed for output redirection
-    )
-    return generate_urdf_cmd
+
 
 
 def generate_launch_description():

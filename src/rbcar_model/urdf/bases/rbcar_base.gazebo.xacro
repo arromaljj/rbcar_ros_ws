@@ -3,12 +3,30 @@
 
   <!-- ros control plugin -->
   <xacro:macro name="ros_control">
+      <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find rbcar_model)/config/rbcar_controllers.yaml</parameters>
+            <ros>
+                <namespace></namespace>
+                <remapping>ackermann_steering_controller/reference_unstamped:=cmd_vel</remapping>
+                <remapping>ackermann_steering_controller/odometry:=odom</remapping>
+                <remapping>ackermann_steering_controller/tf_odometry:=tf</remapping>
+                <robot_base_frame>base_link</robot_base_frame>
+            </ros>
+        </plugin>
+    </gazebo>
+
+<!-- 
     <gazebo>
-      <!-- ROS 2 control plugin -->
+
       <plugin name='gazebo_ros2_control' filename='libgazebo_ros2_control.so'>
         <parameters>$(find rbcar_model)/config/rbcar_controllers.yaml</parameters>
       </plugin>
-    </gazebo>
+    </gazebo> -->
+
+
   </xacro:macro>
 
   <gazebo reference="base_footprint">
