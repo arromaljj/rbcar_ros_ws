@@ -67,9 +67,23 @@
 		<origin xyz="2.101 0 0.206" rpy="0 0 0"/>
 	</xacro:sensor_robosense_helios_16p> -->
 
-	<xacro:sensor_imu_hector prefix="$(arg prefix)imu" parent="$(arg prefix)base_link">
+	<!-- Comment out existing IMU -->
+	<!-- <xacro:sensor_imu_hector prefix="$(arg prefix)imu" parent="$(arg prefix)base_link">
 		<origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
-	</xacro:sensor_imu_hector>
+	</xacro:sensor_imu_hector> -->
+
+	<!-- Add myahrs IMU with correct frame prefix -->
+	    <!-- <xacro:sensor_myahrs frame_prefix="$(arg prefix)imu_" node_namespace="" topic_prefix="imu/" parent="$(arg prefix)base_link" simulation="true" node_name="imu" >
+      <origin xyz="0.319 0.018 0.676" rpy="0 0 0"/> -->
+	<xacro:sensor_myahrs 
+		frame_prefix="$(arg prefix)imu_" 
+		parent="$(arg prefix)base_link" 
+		simulation="true" 
+		node_name="imu" 
+		node_namespace=""
+		topic_prefix="imu/">
+		<origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
+	</xacro:sensor_myahrs>
 
 	<xacro:sensor_sick_outdoorscan3 simulation="true" frame_prefix="$(arg prefix)front_laser" parent="$(arg prefix)base_link"
 	topic_prefix="front_laser" gpu="$(arg gpu)">
