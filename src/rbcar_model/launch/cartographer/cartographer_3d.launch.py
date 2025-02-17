@@ -21,14 +21,14 @@ def generate_launch_description():
     cartographer_config_dir = LaunchConfiguration('cartographer_config_dir', 
         default=os.path.join(rbcar_model_prefix, 'config', 'cartographer'))
     configuration_basename = LaunchConfiguration('configuration_basename',
-        default='rbcar_2d.lua')
+        default='rbcar_3d.lua')
 
     # Occupancy grid parameters
     resolution = LaunchConfiguration('resolution', default='0.05')
     publish_period_sec = LaunchConfiguration('publish_period_sec', default='1.0')
 
     # RViz configuration
-    rviz_config_dir = os.path.join(rbcar_model_prefix, 'rviz', 'cartographer.rviz')
+    rviz_config_dir = os.path.join(rbcar_model_prefix, 'rviz', 'cartographer_3d.rviz')
 
     return LaunchDescription([
         DeclareLaunchArgument(
@@ -53,12 +53,9 @@ def generate_launch_description():
             arguments=['-configuration_directory', cartographer_config_dir,
                       '-configuration_basename', configuration_basename],
             remappings=[
-                # Using both front and rear laser scans
-                ('scan_1', 'hokuyo_utm30lx/hokuyo_utm30lx/scan'),  # Rear laser
-                ('scan_2', 'sick_outdoorscan3/sick_outdoorscan3/scan'),  # Front laser
+                ('points2', 'robot_top_3d_laser_controller/out'),  # RSLidar-16 point cloud
                 ('imu', 'imu/data'),  # IMU data
-            ]
-            ),
+            ]),
 
         DeclareLaunchArgument(
             'resolution',
@@ -70,6 +67,7 @@ def generate_launch_description():
             default_value=publish_period_sec,
             description='OccupancyGrid publishing period'),
 
+        # Include the occupancy grid node
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource([ThisLaunchFileDir(), '/occupancy_grid.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time, 
@@ -84,4 +82,4 @@ def generate_launch_description():
             arguments=['-d', rviz_config_dir],
             parameters=[{'use_sim_time': use_sim_time}],
             output='screen'),
-    ])
+    ]) 

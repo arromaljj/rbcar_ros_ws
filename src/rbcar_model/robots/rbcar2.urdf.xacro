@@ -57,10 +57,10 @@
 	<!-- Sensors -->
 	
 	<!-- Setting gpu to false because the plugin fails -->
-	<!-- <xacro:sensor_rslidar_16 prefix="$(arg prefix)top_3d_laser"  parent="$(arg prefix)base_link"
+	<xacro:sensor_rslidar_16 prefix="$(arg prefix)top_3d_laser"  parent="$(arg prefix)base_link"
 	gpu="false">
 	  <origin xyz="1.163 0.0 1.602" rpy="0 0.2637 0"/>
-	</xacro:sensor_rslidar_16> -->
+	</xacro:sensor_rslidar_16>
 	
 	<!-- <xacro:sensor_robosense_helios_16p frame_prefix="$(arg prefix)front_laser" simulation="true" parent="$(arg prefix)base_link"
 	topic_prefix="top_3d_lidar" gpu="$(arg gpu)">

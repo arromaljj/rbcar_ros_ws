@@ -1,6 +1,6 @@
 controller_manager:
   ros__parameters:
-    update_rate: 10 # Hz
+    update_rate: 50 # Hz
     use_sim_time: true # For simulated robots
 
     joint_state_broadcaster:
@@ -37,7 +37,7 @@ ackermann_steering_controller:
 
     enable_odom_tf: true
     odom_frame_id: robot_odom
-    base_frame_id: robot_base_link
+    base_frame_id: robot_base_footprint
     cmd_vel_topic: "cmd_vel"
     cmd_type: "geometry_msgs/msg/Twist"
 
