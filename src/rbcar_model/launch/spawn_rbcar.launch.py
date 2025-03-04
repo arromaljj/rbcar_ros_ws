@@ -22,8 +22,11 @@ def generate_launch_description():
     # Log the package directory for debugging
     log_pkg_path = LogInfo(msg=f'rbcar_model package path: {pkg_rbcar_model}')
 
+    # Set paths for Gazebo
+    world_file = os.path.join(pkg_rbcar_model, 'worlds', 'small_city.world')
     resource_path = pkg_rbcar_model + ':' + os.environ.get('GAZEBO_RESOURCE_PATH', '')
     log_resource_path_log = LogInfo(msg=f'Resource path: {resource_path}')
+    
     # Set Gazebo resource path
     gazebo_resource_path = SetEnvironmentVariable(
         name='GAZEBO_RESOURCE_PATH',
@@ -36,7 +39,8 @@ def generate_launch_description():
             get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')]),
         launch_arguments={
             'verbose': 'true',
-            'debug': 'true'
+            'debug': 'true',
+            'world': world_file
         }.items()
     )
 

@@ -41,6 +41,17 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}
 )
 
+# Install worlds
+install(DIRECTORY
+  worlds
+  DESTINATION share/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  rviz
+  DESTINATION share/${PROJECT_NAME}
+)
+
 # Create and install output directory
 install(DIRECTORY
   out
@@ -59,7 +70,5 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
-
-
 
 ament_package()

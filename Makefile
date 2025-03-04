@@ -2,7 +2,7 @@
 
 # Build the workspace
 all:
-	colcon build --packages-select rbcar_model	
+	colcon build 
 	@echo "Build complete. Please run 'source install/setup.bash' to source the workspace"
 
 # Clean build artifacts
@@ -21,12 +21,12 @@ spawn:
 launch_rbcar: gazebo spawn
 
 # Launch Cartographer SLAM
-cartographer_2d:
-	ros2 launch rbcar_model cartographer/cartographer.launch.py
+c2d:
+	ros2 launch rbcar_model cartographer.launch.py
 
 # Launch Cartographer 3D SLAM
-cartographer_3d:
-	ros2 launch rbcar_model cartographer/cartographer_3d.launch.py
+c3d:
+	ros2 launch rbcar_model cartographer_3d.launch.py
 
 # Launch occupancy grid generation
 occupancy_grid:
@@ -34,11 +34,19 @@ occupancy_grid:
 
 # Launch RViz with Cartographer configuration
 rviz:
-	ros2 launch rbcar_model rviz/view_robot.launch.py
+	rviz2 -d /root/ros_ws/src/rbcar_model/rviz/nav2.rviz
+
+slam-st:
+	ros2 launch rbcar_slam slam.launch.py
+slam-3d:
+	ros2 launch rbcar_model cartographer_3d.launch.py
 
 # Source the workspace
 source:
 	$(SHELL) -ic 'source ./install/setup.bash'
+
+teleop:
+	ros2 run teleop_twist_keyboard teleop_twist_keyboard
 
 # Help command
 help:

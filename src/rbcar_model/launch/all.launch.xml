@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Define the slam_method argument with default value and allowed options -->
+  <arg name="slam_method" default="c_2d" description="SLAM method to use: c_2d (Cartographer 2D), c_3d (Cartographer 3D), or st_2d (SLAM Toolbox 2D)"/>
+
+  <!-- Include the spawn_rbcar.launch.py to start Gazebo and spawn the robot -->
+  <include file="$(find-pkg-share rbcar_model)/launch/spawn_rbcar.launch.py"/>
+
+    <group if='$(eval "$(arg slam_method)" == "c_2d")'>
+    <include file="$(find-pkg-share rbcar_model)/launch/cartographer/cartographer.launch.py"/>
+    </group>
+
+    <group if='$(eval "$(arg slam_method)" == "c_3d")'>
+    <include file="$(find-pkg-share rbcar_model)/launch/cartographer/cartographer_3d.launch.py"/>
+    </group>
+
+    <group if='$(eval "$(arg slam_method)" == "st_2d")'>
+    <include file="$(find-pkg-share rbcar_slam)/launch/slam.launch.py"/>
+    </group>
+
+</launch> 

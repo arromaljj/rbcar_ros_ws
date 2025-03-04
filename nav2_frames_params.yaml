@@ -1,0 +1,33 @@
+controller_server:
+  ros__parameters:
+    local_costmap:
+      ros__parameters:
+        global_frame: robot_odom
+        robot_base_frame: robot_base_link
+
+    FollowPath:
+      plugin: "dwb_core::DWBLocalPlanner"
+      critics: ["ObstacleFootprintCritic", "GoalAlignCritic", "PathAlignCritic", "PathDistCritic", "GoalDistCritic", "TwirlingCritic"]
+      # Basic critics configuration
+      PathDistCritic.scale: 32.0
+      GoalDistCritic.scale: 24.0
+      PathAlignCritic.scale: 32.0
+      GoalAlignCritic.scale: 24.0
+      TwirlingCritic.scale: 5.0
+      ObstacleFootprintCritic.scale: 1.0
+
+    global_costmap:
+      ros__parameters:
+        global_frame: map
+        robot_base_frame: robot_base_link
+
+amcl:
+  ros__parameters:
+    global_frame_id: map
+    odom_frame_id: robot_odom
+    base_frame_id: robot_base_link
+
+bt_navigator:
+  ros__parameters:
+    global_frame: map
+    robot_base_frame: robot_base_link

@@ -60,6 +60,7 @@
 	<xacro:sensor_rslidar_16 prefix="$(arg prefix)top_3d_laser"  parent="$(arg prefix)base_link"
 	gpu="false">
 	  <origin xyz="1.163 0.0 1.602" rpy="0 0.2637 0"/>
+	  <!-- <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/> -->
 	</xacro:sensor_rslidar_16>
 	
 	<!-- <xacro:sensor_robosense_helios_16p frame_prefix="$(arg prefix)front_laser" simulation="true" parent="$(arg prefix)base_link"
@@ -85,10 +86,12 @@
 		<origin xyz="0.319 0.018 0.676" rpy="0 0 0"/>
 	</xacro:sensor_myahrs>
 
-	<xacro:sensor_sick_outdoorscan3 simulation="true" frame_prefix="$(arg prefix)front_laser" parent="$(arg prefix)base_link"
+	<xacro:sensor_sick_outdoorscan3 simulation="true" frame_prefix="$(arg prefix)front_laser" parent="$(arg prefix)base_link" 
 	topic_prefix="front_laser" gpu="$(arg gpu)">
 		<origin xyz="2.101 0 0.206" rpy="0 0 0"/>
 	</xacro:sensor_sick_outdoorscan3>
+
+
 
 	<xacro:sensor_hokuyo_utm30lx simulation="true" frame_prefix="$(arg prefix)rear_laser" parent="$(arg prefix)base_link"
 	gpu="$(arg gpu)" topic_prefix="rear_laser">

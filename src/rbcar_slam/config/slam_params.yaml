@@ -1,0 +1,62 @@
+slam_toolbox:
+  ros__parameters:
+    # Robot frames
+    base_frame: robot_base_link
+    odom_frame: robot_odom
+    map_frame: map
+
+    # SLAM mode
+    mode: mapping  # localization, mapping, or offline_slam_async
+
+    # Map parameters
+    map_file_name: ""  # Set to empty for a new map
+    map_start_pose: [0.0, 0.0, 0.0]
+    map_start_at_dock: true
+    
+    # Serialization parameters
+    serialize_map: false
+    load_serialized_data: false
+    clear_serialized_data: true
+    serialize_map_directory: ""
+
+    # Optimization parameters
+    solver_plugin: solver_plugins::CeresSolver
+    ceres_linear_solver: SPARSE_NORMAL_CHOLESKY
+    ceres_preconditioner: SCHUR_JACOBI
+    ceres_trust_strategy: LEVENBERG_MARQUARDT
+    
+    # Scan matching parameters
+    use_scan_matching: true
+    use_scan_barycenter: true
+    minimum_travel_distance: 0.5
+    minimum_travel_heading: 0.5
+    scan_buffer_size: 10
+    scan_buffer_maximum_scan_distance: 40.0
+
+    # Main laser parameters (using Sick OutdoorScan3)
+    scan_topic: /sick_outdoorscan3/sick_outdoorscan3/scan
+    max_laser_range: 40.0  # Sick OutdoorScan3 range
+    max_update_rate: 10.0
+    
+    # Loop closure parameters
+    loop_search_space: 8.0
+    resolution: 0.05
+    
+    # Transform timeout
+    transform_timeout: 0.2
+    tf_buffer_duration: 30.0
+    
+    # Map update parameters
+    map_update_interval: 5.0
+    publish_map: true
+    map_publish_interval: 1.0
+    
+    # Advanced mapping parameters
+    use_pose_graph_optimization: true
+    pose_graph_optimization_interval: 0.5
+    enable_interactive_mode: false
+    
+    # Scan matching update thresholds
+    linear_update: 0.5
+    angular_update: 0.25
+    temporal_update: -1.0  # Process every scan
